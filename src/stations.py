@@ -20,6 +20,3 @@ def load_stations(path):
         station = csv_dict[i]
         stations[i] = Station(station["unique_name"], station["latitude"], station["longitude"])
     return stations
-
-
-load_stations("Resources/stations.csv")

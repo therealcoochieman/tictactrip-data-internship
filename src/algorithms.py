@@ -10,11 +10,11 @@ from datetime import timedelta
 from geopy.distance import geodesic
 from unidecode import unidecode
 
-cities_dict = cities.load_cities("Resources/cities.csv")
+cities_dict = cities.load_cities("../Resources/cities.csv")
 ordered_cities = {}
-providers_dict = providers.load_providers("Resources/providers.csv")
-stations_dict = stations.load_stations("Resources/stations.csv")
-tickets = ticket_data.load_tickets("Resources/ticket_data.csv")
+providers_dict = providers.load_providers("../Resources/providers.csv")
+stations_dict = stations.load_stations("../Resources/stations.csv")
+tickets = ticket_data.load_tickets("../Resources/ticket_data.csv")
 average_info = {}
 
 
@@ -46,14 +46,16 @@ def route_duration():
     for key, route in matchings.items():
         trip = 'from ' + cities_dict[key[0]].uniqueName_ + ' to ' + cities_dict[key[1]].uniqueName_ + ':'
         print(trip)
-        print("\tminimal duration = " + str(timedelta(hours=min(route))) + " hours")
-        print("\taverage duration = " + str(timedelta(hours=sum(route) / len(route))) + " hours")
-        print("\tmaximal duration = " + str(timedelta(hours=max(route))) + " hours")
+        print("\tminimal duration = " + str(timedelta(seconds=min(route))) + " hours")
+        print("\taverage duration = " + str(timedelta(seconds=sum(route) / len(route))) + " hours")
+        print("\tmaximal duration = " + str(timedelta(seconds=max(route))) + " hours")
 
 
 def specific_route_duration():
     origin = select_country("Please input the ID of your origin city.")
     dest = select_country("Please input the ID of your destination city.")
+    if origin == dest:
+        print("Honestly it should not take more than 20 minutes, you're already there!")
     # filters from all tickets only the ones with the correct origin/destination
     # I could have made it bidirectional (origin accepted as destination, destination as origin...)
     filtered = filter(lambda dict_ticket: dict_ticket[1].dest == dest and dict_ticket[1].origin == origin,

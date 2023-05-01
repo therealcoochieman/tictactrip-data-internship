@@ -37,6 +37,7 @@ def main():
             user_input = loader.input_num("Just pick from the above!")
 
         switch(user_input)
+        input("Press anything to make another request!")
 
 
 main()
