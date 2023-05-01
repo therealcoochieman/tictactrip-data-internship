@@ -2,8 +2,9 @@ import pandas as pd
 
 import loader
 
+
 class Station:
-    def __init__(self, unique_name,lat,long):
+    def __init__(self, unique_name, lat, long):
         self.unique_name_ = unique_name.strip()
         self.latitude_ = loader.parse_num(lat)
         self.longitude_ = loader.parse_num(long)

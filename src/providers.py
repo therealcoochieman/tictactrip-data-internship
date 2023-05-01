@@ -1,6 +1,5 @@
 import pandas as pd
 from enum import Enum
-import math
 
 import loader
 
